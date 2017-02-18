@@ -5,6 +5,47 @@ var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456
 var request = require('request');
 var router = express.Router();
 
+
+
+
+
+
+
+
+
+
+// Imports the Google Cloud client library
+const Language = require('@google-cloud/language');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const languageClient = Language({
+  projectId: projectId
+});
+
+// The text to analyze
+const text = 'Hello, world!';
+
+// Detects the sentiment of the text
+languageClient.detectSentiment(text)
+  .then((results) => {
+    const sentiment = results[0];
+
+    console.log(`Text: ${text}`);
+    console.log(`Sentiment: ${sentiment}`);
+  });
+
+
+
+
+
+
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Admiral' });

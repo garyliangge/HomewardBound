@@ -113,7 +113,6 @@ router.post('/ad_signup', function(req, res, next) {
 });
 
 router.post('/parse', function (req, res, next) {
-  console.log(req.body);
   languageClient.detectEntities(req.body.query).then(function(results) {
         const entities = results[0];
         var str = "";

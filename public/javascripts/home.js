@@ -3,32 +3,12 @@
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
   $scope.text = "";
+  $scope.query = "";
   $scope.$watch("query", function(newValue, oldValue) {
     if ($scope.query.length > 0) {
-      var method = "post"; // Set method to post by default if not specified.
-      var path = "/parse";
-      var params = [];
-      params.push({
-        key: "query",
-        value: $scope.query
+      $.post("/parse", {query: $scope.query}, function(result){
+          console.log(result);
       });
-
-      var form = document.createElement("form");
-      form.setAttribute("method", method);
-      form.setAttribute("action", path);
-
-      for(var key in params) {
-          if(params.hasOwnProperty(key)) {
-              var hiddenField = document.createElement("input");
-              hiddenField.setAttribute("type", "hidden");
-              hiddenField.setAttribute("name", key);
-              hiddenField.setAttribute("value", params[key]);
-
-              form.appendChild(hiddenField);
-           }
-      }
-      document.body.appendChild(form);
-      form.submit();
       }
   });
 });
@@ -67,8 +47,11 @@ function getArticleImage() {
 function clearList() {
   while (articleList.hasChildNodes()) {
    articleList.removeChild(articleList.lastChild);
- }
- page = 0;
+  }
+  while (articleListPagination.hasChildNodes()) {
+   articleListPagination.removeChild(articleListPagination.lastChild);
+  }
+  page = 0;
 }
 
 function repopulateList() {
@@ -78,6 +61,7 @@ function repopulateList() {
 function getArticle() {
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
+  // const holder = document.createElement('')
 	article.className = 'article-list__item';
 	article.appendChild(articleImage);
   const text = document.createElement('text');

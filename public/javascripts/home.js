@@ -61,9 +61,14 @@ function repopulateList() {
 function getArticle() {
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
-  // const holder = document.createElement('')
+  const holder = document.createElement('div');
+  holder.className = 'imageholder';
 	article.className = 'article-list__item';
-	article.appendChild(articleImage);
+  const button = document.createElement('button');
+  button.className = 'like';
+	holder.appendChild(articleImage);
+  holder.appendChild(button);
+  article.appendChild(holder);
   const text = document.createElement('text');
   text.innerHTML = "Doggo";
   article.appendChild(text);

@@ -1,3 +1,12 @@
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.$watch("query", function(newValue, oldValue) {
+    if ($scope.query.length > 0) {
+      $scope.greeting = $scope.query;
+    }
+  });
+});
+
 function getPageId(n) {
 	return 'article-page-' + n;
 }
@@ -29,11 +38,25 @@ function getArticleImage() {
 	return image;
 }
 
+function clearList() {
+  while (articleList.hasChildNodes()) {
+   articleList.removeChild(articleList.lastChild);
+ }
+ page = 0;
+}
+
+function repopulateList() {
+  addPage(++page);
+}
+
 function getArticle() {
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
 	article.className = 'article-list__item';
 	article.appendChild(articleImage);
+  const text = document.createElement('text');
+  text.innerHTML = "Doggo";
+  article.appendChild(text);
 
 	return article;
 }
@@ -77,7 +100,7 @@ function addPage(page) {
 
 const articleList = document.getElementById('article-list');
 const articleListPagination = document.getElementById('article-list-pagination');
-let page = 0;
+var page = 0;
 
 addPage(++page);
 
@@ -85,3 +108,39 @@ window.onscroll = function() {
 	if (getScrollTop() < getDocumentHeight() - window.innerHeight) return;
 	addPage(++page);
 };
+
+var s = $('.search'),
+    f  = $('form'),
+    a = $('.after'),
+		m = $('h4');
+
+s.focus(function(){
+  if( f.hasClass('open') ) return;
+  f.addClass('in');
+  setTimeout(function(){
+    f.addClass('open');
+    f.removeClass('in');
+  }, 1300);
+});
+
+a.on('click', function(e){
+  e.preventDefault();
+  if( !f.hasClass('open') ) return;
+   s.val('');
+  f.addClass('close');
+  f.removeClass('open');
+  setTimeout(function(){
+    f.removeClass('close');
+  }, 1300);
+})
+
+f.submit(function(e){
+  e.preventDefault();
+  m.html('Thanks, high five!').addClass('show');
+  f.addClass('explode');
+  setTimeout(function(){
+    s.val('');
+    f.removeClass('explode');
+    m.removeClass('show');
+  }, 3000);
+})

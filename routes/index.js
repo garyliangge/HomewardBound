@@ -15,7 +15,10 @@ var router = express.Router();
 
 
 // Imports the Google Cloud client library
-const Language = require('@google-cloud/language');
+const Language = require('@google-cloud/language')({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';

@@ -10,16 +10,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Admiral' });
 });
 
-router.get('/ad', function(req, res, next) {
-  res.render('ad', {query: req.query});
+router.get('/home', function(req, res, next) {
+  res.render('home', {title: 'Home'});
 });
 
 router.get('/adlong', function(req, res, next) {
   res.render('adlong', {query: req.query});
-});
-
-router.get('/login', function(req, res, next) {
-  res.render('login');
 });
 
 router.post('/login_attempt', function(req, res, next) {
@@ -33,12 +29,7 @@ router.post('/login_attempt', function(req, res, next) {
   });
 });
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup');
-});
-
 router.post('/user_signup', function(req, res, next) {
-  console.log("I'm in the post...");
   database.createAccount(req.body.user_email, req.body.user_pass, function(success) {
   	if (success) {
   		console.log("Success!");
@@ -51,40 +42,6 @@ router.post('/user_signup', function(req, res, next) {
 
 router.post('/site_signup', function(req, res, next) {
   database.createAccount(req.body.site_email, req.body.site_pass, function(success) {
-  	if (success) {
-  		console.log("Success!");
-  		res.redirect('/login');
-  	} else {
-  		res.redirect('/signup');
-  	}
-  });
-});
-
-router.post('/captcha', function(req, res, next) {
-  console.log('checking');
-  // g-recaptcha-response is the key that browser will generate upon form submit.
-  // if its blank or null means user has not selected the captcha, so return the error.
-  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
-  }
-  // Put your secret key here.
-  var secretKey = "6LcEfBMUAAAAAKd8b3LrKFHQ-darPH_GA5gb_PPh";
-  // req.connection.remoteAddress will provide IP address of connected user.
-  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-  // Hitting GET request to the URL, Google will respond with success or error scenario.
-  request(verificationUrl,function(error,response,body) {
-    body = JSON.parse(body);
-    // Success will be true or false depending upon captcha validation.
-    if(body.success !== undefined && !body.success) {
-      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
-    }
-    console.log('..succeeded');
-    res.redirect('/userhome');
-  });
-})
-
-router.post('/ad_signup', function(req, res, next) {
-  database.createAccount(req.body.ad_email, req.body.ad_pass, function(success) {
   	if (success) {
   		console.log("Success!");
   		res.redirect('/login');

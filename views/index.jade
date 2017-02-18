@@ -25,13 +25,15 @@ html(lang='en')
     #background
       #logo
         html.
-          Homeward Bound
+          <span style="color: rgb(91,192,222);">Home</span>bound
       #content
         #title
-          | Bring a shelter pet home.
+          | Bring your shelter pet home today. 
         #buttons
+          a(href="/signup")
+            button#signup(type="button") I am putting a pet up for adoption
           a#app(href="/home")
-            button#login(type="button") Start Looking
+            button#login(type="button") I want to adopt a pet
     html.
       <script>
         (function() {

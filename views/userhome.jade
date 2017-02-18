@@ -1,0 +1,85 @@
+doctype html
+html(lang='en')
+  head
+    title Admiral
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet")
+    link(rel="stylesheet",href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css")
+    link(href='/stylesheets/userhome.css', rel='stylesheet')
+    script(src='https://www.google.com/recaptcha/api.js')
+
+  body
+    script.
+      user="#{user}";
+    #app
+      #myModal.modal(ref='myModal')
+        .modal-content
+          form(action="captcha" method="post")
+            .g-recaptcha(data-sitekey="6LcEfBMUAAAAAB3LJAi1ISjD5okgUQo3iR8gAV0_")
+            input(type="submit" value="Submit")
+      nav
+        .navcontainer
+          a(@click='showExpanded = !showExpanded') {{ balance }} credits
+            transition(name='drop')
+              #expandedBalance(v-if='showExpanded')
+                b.border-notch.notch
+                b.notch
+                p You have {{dollars}} dollars in your account
+                button(type='button' @click="transferMoney") Convert credits to dollars
+          a(@click='showExpandedProfile = !showExpandedProfile') {{ username }}
+            span.expand.glyphicon.glyphicon-cog(style='color:white;', aria-hidden='true')
+            #expandedProfile(v-if='showExpandedProfile')
+              button(type='button' @click="logOut") Log out
+        #tabbar
+          a.tab-button(:class="{ active: inAdStream }" @click='viewAdStream') Ad Stream
+          a.tab-button(:class="{ active: inAdAd }" @click='view="adad"') Create Ad
+          a.tab-button(:class="{ active: inEmbed }" @click='view="embed"') Embed Ad
+          a.tab-button(:class="{ active: inGallery }" @click='view="gallery"') My Ads
+
+      transition(name='fade')
+        .adstreamcontainer(v-if='view == "adstream"')
+          #timer(:style="{ width: computedTimerWidth + '%', transition: 'width ' + computedTransition + 's' }")
+          .divider
+          #adstream
+            adbox(v-for='ad in ads', :ad='ad')
+          .divider
+          .divider
+          .divider
+          .divider
+          .divider
+          .divider
+      transition(name='fade')
+        .uploadcontainer(v-if='view == "adad"')
+          .center
+            .divider
+            .divider
+            h2 Create an ad
+            p.center Whenever it's displayed, you'll earn credits automatically
+            form(action="/createAd" method="post")
+              input(type='text' name='name' placeholder='Ad name')
+              input(type='text' name='url' placeholder='Media url')
+              input(type='text' name='src' placeholder='Ad link')
+              input(type='hidden' name='username' v-bind:value='username')
+              input.cta(type='submit' value='Submit')
+      transition(name='fade')
+        .gallery(v-if='view == "gallery"')
+          button#new(type='button' @click='view = "adad"') +
+          .divider
+          .adgallery.center
+            .flexcontainer
+              galleryad(v-for='ad in myads', :ad='ad')
+      transition(name='fade')
+        .embedcontainer.center(v-if='view == "embed"')
+          .divider
+          .divider
+          .divider
+          h1 How to use:
+          p Simply copy and paste the following code into your website
+          .divider
+          .codecontainer(@click="autoselect")
+            p {{embed_code}}
+
+    script(src="/javascripts/vue.js")
+    script(src="/javascripts/util.js")
+    script(src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js")
+    script(src="/javascripts/userhomevue.js")

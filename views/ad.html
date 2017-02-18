@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style type="text/css">
+      body{
+        margin: 0px;
+        border: 0px;
+      }
+      #container{
+         overflow:hidden;
+         margin:0px;
+         border:0px;
+      }
+      .bgimg {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 400px;
+          width: 600px;
+          margin:0px;
+          border:0px;
+          background: url() no-repeat center center;
+      }
+    </style>
+  </head>
+  <body id="container">
+      <div id="ad" class="bgimg" @click="add" onclick="openAd();">Click to show ad</div>
+    <script>
+      function openAd() {
+        document.getElementById("ad").style.background = "url(http://i.imgur.com/sSHMIuz.gif) no-repeat center center";
+        document.getElementById("ad").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

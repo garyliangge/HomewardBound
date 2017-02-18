@@ -18,24 +18,48 @@ var router = express.Router();
 const Language = require('@google-cloud/language');
 
 // Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
+const projectId = 'homewardbound-159107';
 
 // Instantiates a client
 const languageClient = Language({
-  projectId: projectId
+  projectId: projectId,
+  keyFilename: './googleML/HomewardBound-5e1e01370d3e.json'
 });
 
 // The text to analyze
 const text = 'Hello, world!';
 
-// Detects the sentiment of the text
-languageClient.detectSentiment(text)
-  .then((results) => {
-    const sentiment = results[0];
+// languageClient.detectEntities('Axel Foley is from Detroit').then(function(data) {
+//   var entities = data[0].;
+//   var apiResponse = data[1];
 
-    console.log(`Text: ${text}`);
-    console.log(`Sentiment: ${sentiment}`);
-  });
+//   console.log(`Entities: ${entities}`);
+//   console.log(`apiResponse: ${apiResponse}`);
+// });
+
+
+
+
+languageClient.detectEntities('Chewie is a cute Yorkshire Terrier with brown fur and black eyes. She loves to play fetch in a small to medium sized yard. She is also friendly around other dogs!').then(function(results) {
+      const entities = results[0];
+
+      console.log('Entities:');
+      for (let type in entities) {
+        console.log(`${type}:`, entities[type]);
+      }
+
+      return entities;
+    });
+
+// // Detects the sentiment of the text
+// languageClient.detectEntities(text)
+//   .then((results) => {
+//     const sentiment = results[0];
+
+//     console.log(`Text: ${text}`);
+
+//     console.log(`Sentiment: ${results}`);
+//   });
 
 
 

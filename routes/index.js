@@ -5,20 +5,8 @@ var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456
 var request = require('request');
 var router = express.Router();
 
-
-
-
-
-
-
-
-
-
 // Imports the Google Cloud client library
-const Language = require('@google-cloud/language')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+const Language = require('@google-cloud/language');
 
 // Your Google Cloud Platform project ID
 const projectId = 'homewardbound-159107';
@@ -28,49 +16,6 @@ const languageClient = Language({
   projectId: projectId,
   keyFilename: './googleML/HomewardBound-5e1e01370d3e.json'
 });
-
-// The text to analyze
-const text = 'Hello, world!';
-
-// languageClient.detectEntities('Axel Foley is from Detroit').then(function(data) {
-//   var entities = data[0].;
-//   var apiResponse = data[1];
-
-//   console.log(`Entities: ${entities}`);
-//   console.log(`apiResponse: ${apiResponse}`);
-// });
-
-
-
-
-languageClient.detectEntities('Chewie is a cute Yorkshire Terrier with brown fur and black eyes. She loves to play fetch in a small to medium sized yard. She is also friendly around other dogs!').then(function(results) {
-      const entities = results[0];
-
-      console.log('Entities:');
-      for (let type in entities) {
-        console.log(`${type}:`, entities[type]);
-      }
-
-      return entities;
-    });
-
-// // Detects the sentiment of the text
-// languageClient.detectEntities(text)
-//   .then((results) => {
-//     const sentiment = results[0];
-
-//     console.log(`Text: ${text}`);
-
-//     console.log(`Sentiment: ${results}`);
-//   });
-
-
-
-
-
-
-
-
 
 
 /* GET home page. */
@@ -166,6 +111,19 @@ router.post('/ad_signup', function(req, res, next) {
   	}
   });
 });
+
+router.post('/parse', function (req, res, next) {
+  console.log(req.body);
+  languageClient.detectEntities(req.body.query).then(function(results) {
+        const entities = results[0];
+        var str = "";
+        for (let type in entities) {
+          str += entities[type];
+        }
+        res.send({str: str});
+        return entities;
+      });
+})
 
 router.post('/dollars', function(req, res, next) {
   database.showDollars(req.body.user[0], function(dollars) {

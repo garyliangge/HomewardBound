@@ -25,7 +25,7 @@ body {
    width:100%;
    height:60px;
    z-index: 30;
-   background-color: #624CAB;
+   background-color:black;
 }
 
 #navbar {
@@ -191,17 +191,6 @@ main {
   font-size: 2em;
 }
 
-.modalButton {
-  float:left;
-  margin-left: 20px;
-  width: 100px;
-  height: 50px;
-  border-radius: 0px;
-  background-color: rgb();
-  color: white;
-  border: 0px;
-}
-
 /* Modal Content/Box */
 .modal-content {
     color: black;
@@ -209,7 +198,6 @@ main {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    height: 30%;
     width: 50%; /* Could be more or less, depending on screen size */
 }
 
@@ -334,7 +322,7 @@ label::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(193, 206, 254, 0.6);
+  background-color: rgba(18, 67, 100, 0.6);
   content: '';
   opacity: 0;
   pointer-events: none;
@@ -402,7 +390,7 @@ nav::before {
   left: 0;
   z-index: -1;
   width: 25em;
-  background: #758ECD;
+  background: #d62956;
   content: '';
   transform: skewX(15deg) translateX(-100%);
   transform-origin: bottom left;
@@ -542,7 +530,7 @@ form.explode {
   transform: scale(1.4);
   opacity: 0;
 }
-.searchForm {
+form {
   width: 36px;
   height: 36px;
   margin: 0 auto;
@@ -550,7 +538,7 @@ form.explode {
   box-sizing: border-box;
   position: relative;
 }
-.hiddenSubmit{
+input[type="submit"]{
   display: none !important;
 }
 .search {

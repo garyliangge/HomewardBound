@@ -14,84 +14,94 @@ html(lang='en')
   body
     main
       #container
-        .animalName #{params.title}
-        div.image-container
-          img(src=params.picture)
-      .p1
-        h2 Basic Characteristics
-        p #{params.sex}
-        p Age: #{params.age}
-        p Size: #{params.size}
-        p Size Potential: #{params.sizePotential}
-        p House-Trained: #{params.housetrained}
-        p Bark: #{params.bark}
-        p Environment: #{params.environment}
+          .animalName #{params.title}
+          div.image-container
+            img(src=params.picture)
+        .p1
+          h2 Basic Characteristics
+          p #{params.sex}
+          p Age: #{params.age}
+          p Size: #{params.size}
+          p Size Potential: #{params.sizePotential}
+          p House-Trained: #{params.housetrained}
+          p Bark: #{params.bark}
+          p Environment: #{params.environment}
 
-      .p2
-        h2 Current Status
-        p Adoption Status: #{params.status}
-        p Available Date: #{params.availableDate}
-        p Adoption Fee: #{params.adoptionFee}
-        p Urgency Date: #{params.killDate}
-        p Urgency Reason: #{params.killReason}
-        p Location: #{params.location}
-        p Foster Need: #{params.fosterNeed}
-        p Adoption Pending: #{params.adoptionPending}
-        p Sponsorship: #{params.sponsor}
+        .p2
+          h2 Current Status
+          p Adoption Status: #{params.status}
+          p Available Date: #{params.availableDate}
+          p Adoption Fee: #{params.adoptionFee}
+          p Urgency Date: #{params.killDate}
+          p Urgency Reason: #{params.killReason}
+          p Location: #{params.location}
+          p Foster Need: #{params.fosterNeed}
+          p Adoption Pending: #{params.adoptionPending}
+          p Sponsorship: #{params.sponsor}
 
-      .p3
-        h2 Physical Description
-        p Breed: #{params.breed}
-        p Sheds: #{params.sheds}
-        p Coat Length: #{params.coatLength}
-        p Color: #{params.color}
-        p Declawed: #{params.declawed}
-        p Energy: #{params.energy}
-        p Exercise: #{params.exercise}
-        p Fence: #{params.fence}
-        p Activity Level: #{params.activityLevel}
-        p Grooming Needs: #{params.grooming}
+        .p3
+          h2 Physical Description
+          p Breed: #{params.breed}
+          p Sheds: #{params.sheds}
+          p Coat Length: #{params.coatLength}
+          p Color: #{params.color}
+          p Declawed: #{params.declawed}
+          p Energy: #{params.energy}
+          p Exercise: #{params.exercise}
+          p Fence: #{params.fence}
+          p Activity Level: #{params.activityLevel}
+          p Grooming Needs: #{params.grooming}
 
-      .p4
-        h2 Further Descriptions
-        p Place Found: #{params.areaFound}
-        p Good with Children: #{params.children}
-        p Good with Cats: #{params.cats}
-        p Good with Dogs: #{params.dogs}
+        .p4
+          h2 Further Descriptions
+          p Place Found: #{params.areaFound}
+          p Good with Children: #{params.children}
+          p Good with Cats: #{params.cats}
+          p Good with Dogs: #{params.dogs}
 
-      .p5
-        p Description: #{params.description}
+        .p5
+          p Description: #{params.description}
 
-      .p6
-        h2 Contact Information
-        p Phone Number: #{params.phone}
-        p Email: #{params.email}
-        p First Name: #{params.firstName}
-        p Last Name: #{params.lastName}
+        .p6
+          h2 Contact Information
+          p Phone Number: #{params.phone}
+          p Email: #{params.email}
+          p First Name: #{params.firstName}
+          p Last Name: #{params.lastName}
+
+   .newContainer
+    span.button
+    .content
+      .head
+        h1 expand.
+        p.sub by 
+          a(href="http://codepen.io/woodwork/" target="_blank") Joe Harry
+      .body
+        p
+          There once was a wolf named <em>Knox</em>. He lived in a bright blue box. Until one day, his box blew away and he was left with only his <em>socks</em>.
+          <br><br> 
+    .action-bar
 
 
-        nav#menu
-          a(href='http://localhost:3000') Home Screen
-          button(onclick='clearList()')  Clear List
-          button(onclick='repopulateList()')  Repopulate
-          a(href='#') My Liked Pets
-          a(href='#') Take the Survey
-          a(href='#') My Profile
-          a(href='#') Logout
-        #titleBar
-          form.searchform
-            input.search(type='text', ng-model="query")
-            .after
-            input(type='submit')
-          #profile Homebound
-        //- #navbar
-        //-   .navitem.navitem2 Your Liked Pets
-        //-   .navitem.navitem1 Adoption Process
-        //-   .navitem.navitem2 Take the Quiz
-        //-   .navitem.navitem1 Settings
-        #feedHolder
-          #article-list.article-list
-        ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive
+    nav#menu
+      a(href='http://localhost:3000') Home Screen
+      button(onclick='clearList()')  Clear List
+      button(onclick='repopulateList()')  Repopulate
+      a(href='#') My Liked Pets
+      a(href='#') Take the Survey
+      a(href='#') My Profile
+      a(href='#') Logout
+
+    #titleBar
+      #profile Homebound
+    //- #navbar
+    //-   .navitem.navitem2 Your Liked Pets
+    //-   .navitem.navitem1 Adoption Process
+    //-   .navitem.navitem2 Take the Quiz
+    //-   .navitem.navitem1 Settings
+    
     script(src='/javascripts/profile.js')
     script(src='/javascripts/home.js')
     script(src='/javascripts/index.js')
+
+

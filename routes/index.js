@@ -119,9 +119,9 @@ router.post('/parse', function (req, res, next) {
     });
 })
 
-router.post('/dollars', function(req, res, next) {
-  database.showDollars(req.body.user[0], function(dollars) {
-    res.send({dollars: dollars});
+router.post('/getAllAnimals', function(req, res, next) {
+  database.getAnimals(function(animals) {
+    res.send({animals: animals});
   });
 });
 

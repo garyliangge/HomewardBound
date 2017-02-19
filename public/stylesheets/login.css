@@ -52,7 +52,7 @@ div#invalid {
   visibility: hidden;
 }
 
-#login, #cancel {
+#login, #cancel, #signup {
   width: 8vw;
   margin-right: 1vw;
   display: inline-block;

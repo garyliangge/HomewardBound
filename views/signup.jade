@@ -26,13 +26,22 @@ html(lang='en')
             .form-group
               label(for="password", style="color: white;") Password
               input.form-control(type='password', name="user_pass")
+            .form-group
+              label(for="shelter", style="color: white;") Shelter (If you belong to an organization)
+              input.form-control(type='text', placeholder="None" name="user_shelter")
+            .form-group
+              label(for="phone", style="color: white;") Contact Phone
+              input.form-control(type='tel', name="user_phone")
           #buttons
             #user.signup
               button.btn.btn-info.btn-lg.btn-block(type="submit") Sign Up
             #user.cancel
               a(href="/")
                 button.btn.btn-danger.btn-lg.btn-block(type="button") Cancel
-        //- form(v-if='userType == "site"', name="site_signup", method="post", action="/site_signup")
+            #user.login
+              a(href="/login")
+                button.btn.btn-warning.btn-lg.btn-block(type="button") Login
+    //- form(v-if='userType == "site"', name="site_signup", method="post", action="/site_signup")
         //-   #forms
         //-     .form-group
         //-       label(for="username", style="color: white;") Email (This will be your username)

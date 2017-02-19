@@ -7,7 +7,7 @@ mongoose.connect('mongodb://NGNL:ngnlftw1!@ds145359.mlab.com:45359/homebound');
 
 /* Mongo Shit */
 var fs = require("fs");
-var Animals = require('./schema/animals');
+var Animals = require('./schemas/animals');
 
 var database = {
     // insertDocument : function(file, callback) {

@@ -5,15 +5,41 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Roboto+Condensed', rel='stylesheet')
     link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet")
-    link(rel="stylesheet",href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css")
+    script(src='https://use.fontawesome.com/1099bc21bb.js')
     link(href='/stylesheets/home1.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js')
-    script(src="/javascripts/ng-infinite-scroll.min.js")
 
   body
     main
-      div(ng-app='myApp', ng-controller='myCtrl')
+      div
+        #myModal.modal
+          .modal-content
+            span.closeModal ×
+            p Notify me by email about this pet.
+            form
+              input.modalEmail(type='text')
+              input(type='submit')
+            button Submit
+            .positioner
+        .menu
+          .menu_title
+            | Sort By
+          .menu_item
+            input#sneaky_toggle.toggle(name='menu_group', type='radio')
+            .expander
+              label(for='sneaky_toggle')
+                i.menu_icon.fa.fa-globe(title='Distance')
+          .menu_item
+            input#sneaky_toggle2.toggle(name='menu_group', type='radio')
+            .expander
+              label(for='sneaky_toggle2')
+                i.menu_icon.fa.fa-paw(title='Size')
+          .menu_item
+            input#sneaky_toggle3.toggle(name='menu_group', type='radio')
+            .expander
+              label(for='sneaky_toggle3')
+                i.menu_icon.fa.fa-usd(title='Price')
         .dropdown
           .item.collapse
             img.infoImg(src='https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png', align='left')
@@ -46,18 +72,18 @@ html(lang='en')
           a(href='#') My Profile
           a(href='#') Logout
         #titleBar
-          form
+          form.searchform
             input.search(type='text', ng-model="query")
             .after
             input(type='submit')
-          #profile Profile
+          #profile Homebound
         //- #navbar
         //-   .navitem.navitem1 Pet Stream
         //-   .navitem.navitem2 Your Liked Pets
         //-   .navitem.navitem1 Adoption Process
         //-   .navitem.navitem2 Take the Quiz
         //-   .navitem.navitem1 Settings
-        p#query Current Query: {{text}}
+        p#streamTitle Pet Stream
         #feedHolder
           #article-list.article-list
         ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive

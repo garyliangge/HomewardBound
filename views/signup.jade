@@ -21,7 +21,8 @@ html(lang='en')
         form(name="user_signup", method="post", action="/user_signup")
           #forms
             .form-group
-              label(for="age", style="color: white;") Upload CSV
+              label(for="age", style="color: white;") Upload CSV (  
+              a(href='http://www.filedropper.com/template_6', style="color: white;") Get Template)
               input.form-control(type='file', name="user_file")
             .form-group
               label(for="shelter", style="color: white;") Shelter (If you belong to an organization)

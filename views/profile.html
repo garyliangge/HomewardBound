@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head></head>
+<title>Admiral</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+<link href="/stylesheets/home1.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="/javascripts/ng-infinite-scroll.min.js"></script>
+<body bgcolor="#DAF7A6">
+<main></main>
+<div ng-app="myApp" ng-controller="myCtrl"></div>
+<div class="dropdown"></div>
+<div class="item collapse"></div><img class="infoImg" src="https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png" align="left">
+<Urgent>
+  <This>pet will be put down soon.</This>
+</Urgent>
+<div class="item collapse"></div><img class="infoImg" src="https://cdn0.iconfinder.com/data/icons/layout-and-location/24/Untitled-2-02-128.png" align="left">
+<Shelter>
+  <This>pet is from a shelter.</This>
+</Shelter>
+<div class="item collapse"></div><img class="infoImg" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png" align="left">
+<Person>
+  <This>pet is from an owner.</This>
+</Person>
+<div class="item collapse">What are the icons?</div>
+<input id="navcheck" type="checkbox" role="button" title="menu">
+<label for="navcheck" aria-hidden="true" title="menu"></label><span class="burger"></span><span class="bar"></span><span class="visuallyhidden">Menu</span>
+<nav id="menu"></nav><a href="http://localhost:3000">Home Screen</a>
+<button onclick="clearList()"> Clear List</button>
+<button onclick="repopulateList()"> Repopulate</button><a href="#">Pet Stream</a><a href="#">My Liked Pets</a><a href="#">Take the Survey</a><a href="#">My Profile</a><a href="#">Logout</a>
+<div id="titleBar"></div>
+<form></form>
+<input class="search" type="text" ng-model="query">
+<div class="after"></div>
+<input type="submit">
+<div id="profile">Profile</div>
+<ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
+<script src="/javascripts/home.js"></script>
+<form action="https://formspree.io/your@email.com" method="POST"></form>
+<input type="text" name="name">
+<input type="email" name="_replyto">
+<input type="submit" value="Send">

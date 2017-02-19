@@ -1,0 +1,82 @@
+doctype html
+html(lang='en')
+  head
+    title Admiral
+    link(href='https://fonts.googleapis.com/css?family=Roboto+Condensed', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Source+Code+Pro', rel='stylesheet')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css')
+    link(href='/stylesheets/home1.css', rel='stylesheet')
+    link(href='/stylesheets/infopage.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js')
+    script(src='/javascripts/ng-infinite-scroll.min.js')
+  body(bgcolor="#7FB3D5")
+    main
+      div(ng-app='myApp', ng-controller='myCtrl')
+        .dropdown
+          .item.collapse
+            img.infoImg(src='https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png', align='left')
+            | Urgent: This pet will be put down soon.
+          .item.collapse
+            img.infoImg(src='https://cdn0.iconfinder.com/data/icons/layout-and-location/24/Untitled-2-02-128.png', align='left')
+            | Shelter: This pet is from a shelter.
+          .item.collapse
+            img.infoImg(src='https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png', align='left')
+            | Person: This pet is from an owner.
+          .item.collapse What are the icons?
+        input#navcheck(type='checkbox', role='button', title='menu')
+        label(for='navcheck', aria-hidden='true', title='menu')
+          span.burger
+            span.bar
+              span.visuallyhidden Menu
+
+      #fidoPicture
+          #image
+            img(src='media/cat.png')
+          #rectangle
+          .title
+            h2 IsPupper?
+
+
+        nav#menu
+          a(href='http://localhost:3000') Home Screen
+          button(onclick='clearList()')  Clear List
+          button(onclick='repopulateList()')  Repopulate
+          a(href='#') Pet Stream
+          a(href='#') My Liked Pets
+          a(href='#') Take the Survey
+          a(href='#') My Profile
+          a(href='#') Logout
+        #titleBar
+          form
+            input.search(type='text', ng-model='query')
+            .after
+            input(type='submit')
+          #profile Profile
+        ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive
+    script(src='/javascripts/home.js')
+
+    .formFormat
+      form(action='https://formspree.io/gillichu@berkeley.com', method='POST')
+              | First Name:
+              br
+              |   
+              input(type='text', name='firstname')
+              br
+              |   Last Name:  
+              input(type='text', name='lastname')
+              br
+              |   Email:
+              br
+              |  
+              input(type='email', name='_replyto') 
+              br
+              |   Text:
+              br
+              |  
+              input(type='text', name='message')
+              br
+              br
+              |   
+              input(type='submit', value='Submit')

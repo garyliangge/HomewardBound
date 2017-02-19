@@ -571,7 +571,7 @@ form.explode {
   transform: scale(1.4);
   opacity: 0;
 }
-form {
+.searchForm {
   width: 36px;
   height: 36px;
   margin: 0 auto;
@@ -579,7 +579,7 @@ form {
   box-sizing: border-box;
   position: relative;
 }
-input[type="submit"]{
+.hiddenSubmit{
   display: none !important;
 }
 .search {

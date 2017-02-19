@@ -9,7 +9,6 @@ html(lang='en')
     link(href='/stylesheets/home1.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js')
-    script(type='text/javascript', src='https://cdn.emailjs.com/dist/email.min.js')
     script(type='text/javascript').
       (function(){
       emailjs.init("user_7tCQ5t5nob4ZvvRu3LRde");
@@ -26,7 +25,6 @@ html(lang='en')
             form(action='https://formspree.io/mzqu98@gmail.com', method='POST')
               input.modalEmail(type='email', name="_replyto", placeholder="Email")
               input#modalHidden(type='hidden', name='pet URL', value='www.google.com')
-              
               input.modalButton(type='submit', value = 'Send')
         #myModal2.modal
           .modal-content2

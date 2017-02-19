@@ -59,10 +59,15 @@ router.get('/profile', function(req, res, next) {
           breed : result.animalBreed,
           sheds : (result.animalShedding) ? "yes" : "no",
 
+          phone : result.fosterPhoneCell,
+          email : result.fosterEmail,
+          firstName : result.fosterFirstname,
+          lastName : result.fosterLastname,
+
           coatLength : (!result.animalcoatLength==null) ? (result.animalcoatLength += "") : "Not Applicable",
           color : result.animalColor,
           declawed : (result.animalDeclawed) ? "yes" : "no",
-          description: result.animalDescription,
+          description: result.animalDescriptionPlain,
           distinguishingMarks : result.animalDistinguishingMarks,
           energy : result.animalEnergyLevel,
           exercise : result.animalExerciseNEeds,
@@ -83,6 +88,8 @@ router.get('/profile', function(req, res, next) {
           sponsor : result.animalSponsorshipDetails,
           bark : (!result.animalVocal==null) ? (result.animalVocal += "") : "Not Applicable",
           
+          picture : result.animalPictures[0].urlSecureFullsize += "",
+
         }});
     console.log(result.animalFoundPostalcode);
     console.log(result.animalFence);

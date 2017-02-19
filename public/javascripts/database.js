@@ -43,8 +43,13 @@ var database = {
         Animals.find({}, function(err, array) {
             callback(array);
         });
+    },
+
+    getAnimalById : function(id, callback) {
+        Animals.where({animalID : id}).findOne({}, function(err, array) {
+            callback(array);
+        });
     }
 
 };
 module.exports = database;
-

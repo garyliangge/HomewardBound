@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Sign Up for Admiral
+    title Put a pet up for fostering
     link(rel='shortcut icon', type='image/x-icon', href='media/favicon.png')
     link(rel="stylesheet", href="/stylesheets/bootstrap.css", type="text/css", media="screen")
     link(rel="stylesheet", href="/stylesheets/signup.css", type="text/css", media="screen")
@@ -9,10 +9,10 @@ html(lang='en')
   body
     #app
       #nav
-        a(href='/') Admiral
+        a(href='/') Homeward
       #background
         #title
-          | Sign Up
+          | Sign A Pet Up
         //- #userSelector
         //-   #selectorcontainer
         //-     button#userbtn.btn.btn-primary(type='button' @click='userType = "user"' v-bind:class="{'active': userType=='user' }") User
@@ -21,11 +21,8 @@ html(lang='en')
         form(name="user_signup", method="post", action="/user_signup")
           #forms
             .form-group
-              label(for="username", style="color: white;") Email (This will be your username)
-              input.form-control(type='text', placeholder="Email", name="user_email")
-            .form-group
-              label(for="password", style="color: white;") Password
-              input.form-control(type='password', name="user_pass")
+              label(for="age", style="color: white;") Upload CSV
+              input.form-control(type='file', name="user_file")
             .form-group
               label(for="shelter", style="color: white;") Shelter (If you belong to an organization)
               input.form-control(type='text', placeholder="None" name="user_shelter")
@@ -38,9 +35,6 @@ html(lang='en')
             #user.cancel
               a(href="/")
                 button.btn.btn-danger.btn-lg.btn-block(type="button") Cancel
-            #user.login
-              a(href="/login")
-                button.btn.btn-warning.btn-lg.btn-block(type="button") Login
     //- form(v-if='userType == "site"', name="site_signup", method="post", action="/site_signup")
         //-   #forms
         //-     .form-group

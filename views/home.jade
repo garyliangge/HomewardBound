@@ -64,19 +64,15 @@ html(lang='en')
               span.visuallyhidden Menu
         nav#menu
           a(href='http://localhost:3000') Home Screen
-          button(onclick='clearList()')  Clear List
-          button(onclick='repopulateList()')  Repopulate
           a(href='#') Pet Stream
-          a(href='#') My Liked Pets
           a(href='#') Take the Survey
-          a(href='#') My Profile
-          a(href='#') Logout
+          a(href='#') Put a pet up for fostering
         #titleBar
           form.searchform
             input.search(type='text', ng-model="query")
             .after
             input(type='submit')
-          #profile Homebound
+          #profile Homeward
         //- #navbar
         //-   .navitem.navitem1 Pet Stream
         //-   .navitem.navitem2 Your Liked Pets

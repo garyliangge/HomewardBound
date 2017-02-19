@@ -8,40 +8,95 @@ app.controller('myCtrl', function($scope) {
   $scope.numSpaces = 0;
   $scope.query = "";
   $scope.result = "";
-  $scope.$watch("query", function(newValue, oldValue) {
-    var string = $scope.query;
-    if (string.length > 0) {
-      var tempSpaces = countSpaces(string.trim());
-      if(tempSpaces != $scope.numSpaces) {
-        $scope.numSpaces = tempSpaces;
-        $.post("/parse", {query: string}, function(result){
-          filterResults(result);
-        });
-      }
-    }
-  });
+  // $scope.$watch("query", function(newValue, oldValue) {
+  //   var string = $scope.query;
+  //   if (string.length > 0) {
+  //     var tempSpaces = countSpaces(string.trim());
+  //     if(tempSpaces != $scope.numSpaces) {
+  //       $scope.numSpaces = tempSpaces;
+  //       filterResults(string.trim().split(" "));
+  //     }
+  //   }
+  // });
 });
-
+var newPets = [];
 function filterResults(result) {
-  for (j = 0; j < pets.length; j++) {
-    for (i = 0; i < result.length; i++) {
-      if (fuzzyContains(result[i].name, pets[j].tags)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  newPets = [];
+  filterResultsHelper(result, 0);
 }
 
-function fuzzyContains(string, array) {
-  for (i = 0; i < array.length; i++) {
-    $.post("/stringComp", {str1: string, str2: array[i]}, function(result) {
-      if (result >= 0.8) {
-        return true;
+function filterResultsHelper(result, index) {
+  $.post("/getTagsById", {id: pets[index].animalID}, function(res) {
+    var tags = res;
+    if (tags.length > 10) {
+      tags = tags.slice(0, 10);
+    }
+    for (i = 0; i < result.length; i++) {
+      for (j = 0; j < tags.length; j++) {
+        if (result[i] === tags[j]) {
+          console.log("match found " + tags[j] + ", " + index);
+          newPets.push(pets[index]);
+          if (index < pets.length - 1) {
+            filterResultsHelper(result, index + 1);
+            return;
+          } else {
+            if (newPets.length > 0) {
+              pets = newPets;
+              clearList();
+              repopulateList();
+            }
+            return;
+          }
+        }
       }
-      return false;
-    });
+    }
+    if (index < pets.length - 1) {
+      filterResultsHelper(result, index + 1);
+      return;
+    } else {
+      if (newPets.length > 0) {
+        pets = newPets;
+        clearList();
+        repopulateList();
+      }
+      return;
+    }
+  });
+}
+
+function filterResultsHelperHelper(pet, result, tags, index, newPets, callback) {
+  fuzzyContains(result[index].name, tags, function(boolean) {
+    if (boolean) {
+      newPets.push(pet);
+    }
+    if (index < result.length - 1) {
+      filterResultsHelperHelper(pet, result, tags, index + 1, newPets, callback);
+    } else {
+      callback();
+    }
+  });
+}
+
+function fuzzyContains(string, array, callback) {
+  fuzzyContainsHelper(string, array, 0, function(boolean) {
+    callback(boolean);
+  })
+}
+
+function fuzzyContainsHelper(string, array, index, callback) {
+  if (string == null) {
+    callback();
+    return;
   }
+  $.post("/stringComp", {str1: string, str2: array[index]}, function(result) {
+    if (result >= 0.8) {
+      callback(true);
+    } else if (index > array.length - 1) {
+      callback(false);
+    } else {
+      fuzzyContainsHelper(string, array, index + 1, callback);
+    }
+  });
 }
 
 function countSpaces(string) {
@@ -52,10 +107,7 @@ function countSpaces(string) {
 
 $(".search").on('keyup', function (e) {
     if (e.keyCode == 13) {
-      console.log({query: $(".search").val()});
-        $.post("/parse", {query: $(".search").val()}, function(result){
-          filterResults(result);
-        });
+        filterResults($(".search").val().trim().split(" "));
     }
 });
 var dropdown = $('.dropdown');
@@ -291,7 +343,8 @@ function getArticle() {
   text.innerHTML = pets[id].animalName;
   petBasicInfo.append(text);
   var today = new Date();
-  if (pets[id].animalKillDate != null  && today.getTime() < pets[id].animalKillDate.getTime() + 604800000) { //one week
+  // if (pets[id].animalKillDate != null  && today.getTime() < pets[id].animalKillDate.getTime() + 604800000) { //one week
+  if(!pets[id].animalAltered) {
     const urgency = document.createElement('img');
     urgency.src = 'https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png';
     urgency.className = "notification";
@@ -335,6 +388,7 @@ function setButtons() {
       var temp = this.id.split("-");
       var modal = document.getElementById('myModal');
       document.getElementById('modalParagraph').innerHTML = "Notify me by email about " + pets[parseInt(temp[1])].animalName + ".";
+      document.getElementById('modalHidden').value = "https://homebound-159210.appspot-preview.com/profile?q=" + pets[parseInt(temp[1])].animalID;
       modal.style.display = "block";
     });
     var box = "#article-" + i;
@@ -369,13 +423,15 @@ function init() {
   });
 }
 
-function getArticlePage(page, articlesPerPage = 16) {
+function getArticlePage(page, articlesPerPage = 6) {
 	const pageElement = document.createElement('div');
 	pageElement.id = getPageId(page);
 	pageElement.className = 'article-list__page';
 
 	while (articlesPerPage--) {
-		pageElement.appendChild(getArticle());
+    if (id < pets.length) {
+      pageElement.appendChild(getArticle());
+    }
 	}
 
 	return pageElement;
@@ -402,9 +458,11 @@ function fetchPage(page) {
 }
 
 function addPage(page) {
-	fetchPage(page);
-	addPaginationPage(page);
-  setButtons();
+  if (id < pets.length) {
+    fetchPage(page);
+  	addPaginationPage(page);
+    setButtons();
+  }
 }
 
 const articleList = document.getElementById('article-list');

@@ -24,6 +24,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Homeward' });
 });
 
+router.post('/getTagsById', function(req, res, next) {
+  database.getTags(req.body.id, function(result) {
+    res.send(result);
+  });
+})
+
 router.get('/ad', function(req, res, next) {
   res.render('ad', {query: req.query});
 });
@@ -40,11 +46,11 @@ router.get('/profile', function(req, res, next) {
   var query = req.query;
   console.log(query.q);
   database.getAnimalById(parseInt(query.q), function(result){
-    res.render('profile', 
+    res.render('profile',
       {params:
         {
           //Basic Characteristics
-          title: result.animalName, 
+          title: result.animalName,
           sex: result.animalSex,
           age: result.animalAgeString,
           size: result.animalSizeCurrent,
@@ -93,7 +99,7 @@ router.get('/profile', function(req, res, next) {
         }});
     console.log(result.animalFoundPostalcode);
     console.log(result.animalFence);
-  });           
+  });
 });
 
 router.get('/home', function(req, res, next) {
@@ -108,7 +114,8 @@ router.post('/typeformTest', function(req, res, next) {
 router.post('/stringComp', function(req, res, next) {
   var str1 = req.body.str1;
   var str2 = req.body.str2;
-  res.send(str1.compare(str2, 0.5));
+  var result = str1.score(str2, 0.5);
+  res.send(result + "");
 })
 
 router.post('/login_attempt', function(req, res, next) {

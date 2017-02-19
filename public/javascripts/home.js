@@ -13,6 +13,21 @@ app.controller('myCtrl', function($scope) {
   });
 });
 
+var dropdown = $('.dropdown');
+var item = $('.item');
+
+item.on('click', function() {
+  item.toggleClass('collapse');
+
+  if (dropdown.hasClass('dropped')) {
+    dropdown.toggleClass('dropped');
+  } else {
+    setTimeout(function() {
+      dropdown.toggleClass('dropped');
+    }, 150);
+  }
+})
+
 function getPageId(n) {
 	return 'article-page-' + n;
 }
@@ -59,6 +74,9 @@ function repopulateList() {
 }
 
 function getArticle() {
+  $.get("https://console.cloud.google.com/storage/homeward_bound/", function(result){
+      console.log(result);
+  });
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
   const holder = document.createElement('div');
@@ -66,12 +84,35 @@ function getArticle() {
 	article.className = 'article-list__item';
   const button = document.createElement('button');
   button.className = 'like';
+  // button.id =
 	holder.appendChild(articleImage);
   holder.appendChild(button);
   article.appendChild(holder);
   const text = document.createElement('text');
+  text.className = "petName";
   text.innerHTML = "Doggo";
   article.appendChild(text);
+  if (true) { //if urgency
+    const urgency = document.createElement('img');
+    urgency.src = 'https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png';
+    urgency.className = "notification";
+    article.appendChild(urgency);
+  }
+  if (true) { //if from shelter
+    const shelter = document.createElement('img');
+    shelter.src = 'https://cdn0.iconfinder.com/data/icons/layout-and-location/24/Untitled-2-02-128.png';
+    shelter.className = "notification";
+    article.appendChild(shelter);
+  } else { // if not from shelter
+    const nonshelter = document.createElement('img');
+    nonshelter.src = 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png';
+    nonshelter.className = "notification";
+    article.appendChild(nonshelter);
+  }
+  const details = document.createElement('div');
+  details.className = "petDetails";
+  details.innerHTML = "Rarest pupper this side of the valley of doggos. Sleep tight.";
+  article.appendChild(details);
 
 	return article;
 }

@@ -143,14 +143,37 @@ main {
 
 .imageholder {
   position: relative;
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+}
+
+.notification {
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
 }
 
 .imageholder .like {
+  outline: none;
+  border: 0;
   position: absolute;
   width: 50px;
   height: 50px;
   top: 10px; /*your button position*/
   right: 10px; /*your button position*/
+  background:url('http://i.imgur.com/3OChXd7.png');
+  background-size: contain;
+}
+
+.imageholder .like:active {
+  transform: scale(0.9, 0.9);
+}
+
+.imageholder .like:hover {
+  background:url('http://i.imgur.com/OS3krRq.png');
+  background-size: contain;
 }
 
 .article-list__item {
@@ -176,7 +199,6 @@ main {
   opacity: 1;
   transition: opacity 0.2s;
   width: 100%;
-  height: 70%;
 }
 
 .article-list__item__image--loading {
@@ -217,6 +239,19 @@ main {
 }
 .article-list__pagination__item a:active {
   color: #d5d5d5;
+}
+
+.petName {
+  color: rgb(120, 120, 120);
+  font-size: 3em;
+  padding-left: 10px;
+}
+
+.petDetails {
+  color: rgb(40, 40, 40);
+  font-size: 1em;
+  padding-left: 10px;
+  width: 100%;
 }
 
 label {
@@ -557,6 +592,13 @@ form.open .after:after {
   right: 15px;
 }
 
+.infoImg {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  background-size: contain;
+}
+
 @keyframes aftermagic {
   0%   {}
   10% {
@@ -647,4 +689,73 @@ form.open .after:after {
       width: 250px;
       color: #fff;
     }
+}
+
+.dropdown {
+  width: 330px;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  top: 5em;
+  color: black;
+  perspective: 1000px;
+  z-index: 3;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropped {
+  height: 200px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 0 0;
+  padding: 0 20px;
+  background-color: white;
+  transition: transform .15s linear;
+  cursor: pointer;
+  user-select: none;
+}
+.item:last-child {
+  transform: translate3d(0, -150px, 0);
+}
+.item:not(:last-child) {
+  transform: translate3d(0, 50px, 0);
+}
+.item:hover:not(:last-child) {
+  background-color: #fafafa;
+}
+
+.collapse:nth-of-type(1) {
+  transform: translate3d(0, 0px, 0) scale(1.025);
+}
+.collapse:nth-of-type(1) {
+  transform: translate3d(0, 0, 0);
+}
+.collapse:nth-of-type(2) {
+  transform: translate3d(0, -56px, 0) scale(1.05);
+}
+.collapse:nth-of-type(1) {
+  transform: translate3d(0, 0, 0);
+}
+.collapse:nth-of-type(3) {
+  transform: translate3d(0, -112px, 0) scale(1.075);
+}
+.collapse:nth-of-type(1) {
+  transform: translate3d(0, 0, 0);
+}
+.collapse:nth-of-type(4) {
+  transform: translate3d(0, -168px, 0) scale(1.1);
+}
+.collapse:nth-of-type(1) {
+  transform: translate3d(0, 0, 0);
+}
+.collapse:hover:last-child {
+  transform-origin: 50% 100%;
+  transform: translate3d(0, -174px, 0) rotateX(30deg) scale(1.1);
 }

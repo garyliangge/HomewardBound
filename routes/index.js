@@ -45,6 +45,11 @@ router.get('/home', function(req, res, next) {
   res.render('home');
 });
 
+router.post('/typeformTest', function(req, res, next) {
+  console.log(req);
+  console.log(req.body);
+});
+
 router.post('/stringComp', function(req, res, next) {
   var str1 = req.body.str1;
   var str2 = req.body.str2;

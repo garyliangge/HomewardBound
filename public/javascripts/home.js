@@ -1,18 +1,21 @@
-'Chewie is a cute Yorkshire Terrier with brown fur and black eyes. She loves to play fetch in a small to medium sized yard. She is also friendly around other dogs!'
+// 'Chewie is a cute Yorkshire Terrier with brown fur and black eyes. She loves to play fetch in a small to medium sized yard. She is also friendly around other dogs!'
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
-  $scope.text = "";
-  $scope.query = "";
-  $scope.$watch("query", function(newValue, oldValue) {
-    if ($scope.query.length > 0) {
-      $.post("/parse", {query: $scope.query}, function(result){
-          console.log(result);
-      });
-      }
-  });
+
 });
 
+
+$(".search").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+      console.log({query: $(".search").val()});
+        $.post("/parse", {query: $(".search").val()}, function(result){
+          for(var i = 0; i < result.length; i++) {
+            console.log(result[i].name, result[i].salience);
+          }
+        });
+    }
+});
 var dropdown = $('.dropdown');
 var item = $('.item');
 

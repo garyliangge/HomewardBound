@@ -18,6 +18,7 @@ const languageClient = Language({
 });
 
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Admiral' });
@@ -114,14 +115,8 @@ router.post('/ad_signup', function(req, res, next) {
 
 router.post('/parse', function (req, res, next) {
   languageClient.detectEntities(req.body.query).then(function(results) {
-        const entities = results[0];
-        var str = "";
-        for (let type in entities) {
-          str += entities[type];
-        }
-        res.send({str: str});
-        return entities;
-      });
+      res.send(results[1].entities);
+    });
 })
 
 router.post('/dollars', function(req, res, next) {

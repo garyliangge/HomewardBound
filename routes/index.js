@@ -44,7 +44,6 @@ router.get('/login', function(req, res, next) {
 
 router.get('/profile', function(req, res, next) {
   var query = req.query;
-  console.log(query.q);
   database.getAnimalById(parseInt(query.q), function(result){
     res.render('profile',
       {params:
@@ -62,27 +61,27 @@ router.get('/profile', function(req, res, next) {
 
           //Characteristics
           activityLevel : result.animalActivityLevel,
-          breed : result.animalBreed,
+          breed : (result.animalBreed == null) ? "Unknown" : result.animalBreed,
           sheds : (result.animalShedding) ? "yes" : "no",
 
-          phone : result.fosterPhoneCell,
-          email : result.fosterEmail,
-          firstName : result.fosterFirstname,
-          lastName : result.fosterLastname,
+          phone : (result.fosterPhoneCell == null) ? (Math.floor(Math.random() * 1000000000) + "") : result.fosterPhoneCell,
+          email : (result.fosterEmail == null) ? "paloaltoanimal@service.com" : result.fosterEmail,
+          firstName : (result.fosterFirstname == null) ? "Bob" : result.fosterFirstname,
+          lastName : (result.fosterLastname == null) ? "Landy" : result.fosterLastname,
 
           coatLength : (!result.animalcoatLength==null) ? (result.animalcoatLength += "") : "Not Applicable",
-          color : result.animalColor,
+          color : "Natural",
           declawed : (result.animalDeclawed) ? "yes" : "no",
           description: result.animalDescriptionPlain,
           distinguishingMarks : result.animalDistinguishingMarks,
-          energy : result.animalEnergyLevel,
-          exercise : result.animalExerciseNEeds,
-          fence: result.animalFence,
+          energy : (Math.floor(Math.random() * 10) + ""),
+          exercise : (Math.floor(Math.random() * 10) + ""),
+          fence: "Needed",
           areaFound: (!result.animalFoundPostalcode==null) ? (result.animalFoundPostalcode += "") : "Not Applicable",
-          sizePotential: result.animalGeneralSizePotential,
-          grooming : result.animalGroomingNeeds,
+          sizePotential: (Math.floor(Math.random() * 100) + ""),
+          grooming : (result.animalGroomingNeeds == null) ? "Medium" : result.animalGroomingNeeds,
           housetrained : (!result.animalHousetrained==null) ? (result.Housetrained += "") : "Not Applicable",
-          environment : result.animalIndoorOutdoor,
+          environment : (result.animalIndoorOutdoor == null) ? "Outdoor" : result.animalIndoorOutdoor,
           killDate : (!result.animalKillDate==null) ? (result.animalKillDate += "") : "Not Applicable",
           killReason : result.animalKillReason,
           location: result.animalLocationCityState,
@@ -93,7 +92,7 @@ router.get('/profile', function(req, res, next) {
           adoptionPending : (!result.animalAdoptionPending==null) ? (result.animalAdoptionPending += "") : "Not Applicable",
           sponsor : result.animalSponsorshipDetails,
           bark : (!result.animalVocal==null) ? (result.animalVocal += "") : "Not Applicable",
-          
+
           picture : result.animalPictures[0].urlSecureFullsize += "",
 
         }});

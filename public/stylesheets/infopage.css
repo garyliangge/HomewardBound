@@ -6,10 +6,10 @@
 	margin: 0;
     padding: 0;
     min-width: 100%;
-    min-height: 850px;  
+    min-height: 850px;
     padding-left:30px;
-	padding-right:30px; 
-	padding-top: 50px; 
+	padding-right:30px;
+	padding-top: 50px;
 	margin-bottom: 30px;
 }
 
@@ -34,41 +34,41 @@
 }
 
 .p1{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
-	top: 80px;
-	right: 80px;
+	top: 4em;
+	right: 1em;
 	color: black;
 }
 
 .p2{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
-	bottom: 0px;
-	right: 70px;
+	bottom: -5em;
+	right: 1em;
 	color: black;
 }
 
 .p3{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
-	bottom: 60px;
-	left: 80px;
+	bottom: 0em;
+	left: 1em;
 	color: black;
 }
 
 .p4{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
-	top: 80px;
-	left: 80px;
+	top: 4em;
+	left: 1em;
 	color: black;
 }
 
 .p5{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
-	bottom: -70px;
+	bottom: -5em;
 	color: black;
   	align-items: center;
   	left:360px;
@@ -78,14 +78,14 @@
 }
 
 .p6{
-	font-size:14px;
+	font-size:0.9em;
 	position: absolute;
 	color: black;
 
-	bottom: -140px;
-	left: 80px;
+	bottom: -13em;
+	left: 1em;
   	max-width: 50%;
-  	max-height:30%;  
+  	max-height:30%;
 }
 
 .formFormat{
@@ -167,7 +167,7 @@
   right: 5%;
   font-size: 1em;
 }
- 
+
 
 h2, h3, h4, h5, h6 {
   text-align: center;
@@ -323,8 +323,8 @@ em{
   transition: all 0.7s $easer;
 }
 .button.expand {
-  -webkit-transform: rotate(585deg); 
-      -ms-transform: rotate(585deg); 
+  -webkit-transform: rotate(585deg);
+      -ms-transform: rotate(585deg);
           transform: rotate(585deg);
 
   transition: all 0.5s $easer;
@@ -335,7 +335,7 @@ em{
   margin: auto;
   left: 0;
   right: 0;
-  top: 5vh;  
+  top: 5vh;
   background-color: $primary-col;
 
   border-radius: 50%;
@@ -347,8 +347,8 @@ em{
   overflow: hidden;
 
   transition: all 0.2s 0.45s,
-              height 0.2s $easer 0.25s, 
-              max-width 0.2s $easer 0.35s, 
+              height 0.2s $easer 0.25s,
+              max-width 0.2s $easer 0.35s,
               width 0.2s $easer 0.35s;
 }
 .container.expand {

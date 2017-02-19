@@ -7,12 +7,10 @@ html(lang='en')
     link(href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet")
     script(src='https://use.fontawesome.com/1099bc21bb.js')
     link(href='/stylesheets/home1.css', rel='stylesheet')
-    link(href='/stylesheets/infopage.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js')
-    script(src='/javascripts/ng-infinite-scroll.min.js')
-  body(bgcolor="#7FB3D5")
 
+  body
     main
       div
         #myModal.modal
@@ -46,6 +44,12 @@ html(lang='en')
           .item.collapse
             img.infoImg(src='https://cdn4.iconfinder.com/data/icons/online-menu/64/attencion_exclamation_mark_circle_danger-128.png', align='left')
             | Urgent: This pet will be put down soon.
+          //- .item.collapse
+          //-   img.infoImg(src='http://i.imgur.com/3OChXd7.png', align='left')
+          //-   | Empty Heart: You have not liked this pet.
+          //- .item.collapse
+          //-   img.infoImg(src='http://i.imgur.com/OS3krRq.png', align='left')
+          //-   | Full Heart: You have liked this pet.
           .item.collapse
             img.infoImg(src='https://cdn0.iconfinder.com/data/icons/layout-and-location/24/Untitled-2-02-128.png', align='left')
             | Shelter: This pet is from a shelter.
@@ -58,15 +62,6 @@ html(lang='en')
           span.burger
             span.bar
               span.visuallyhidden Menu
-
-      #fidoPicture
-          #image
-            img(src='media/cat.png')
-          #rectangle
-          .title
-            h2 IsPupper?
-
-
         nav#menu
           a(href='http://localhost:3000') Home Screen
           button(onclick='clearList()')  Clear List
@@ -92,28 +87,5 @@ html(lang='en')
         #feedHolder
           #article-list.article-list
         ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive
-    script(src='/javascripts/home.js')
-
-    .formFormat
-      form(action='https://formspree.io/gillichu@berkeley.com', method='POST')
-              | First Name:
-              br
-              |   
-              input(type='text', name='firstname')
-              br
-              |   Last Name:  
-              input(type='text', name='lastname')
-              br
-              |   Email:
-              br
-              |  
-              input(type='email', name='_replyto') 
-              br
-              |   Text:
-              br
-              |  
-              input(type='text', name='message')
-              br
-              br
-              |   
-              input(type='submit', value='Submit')
+      
+    script(src="/javascripts/home.js")

@@ -49,12 +49,26 @@ var database = {
         db.once('open', function() {
           // we're connected!
               var cursor = db.collection('animals').find({},{'animalID':1, 'animalDescription': 1});
-              var arr = cursor.toArray(
-                  function(err, doc){
-                      callback(doc);
-                  });
+
+              cursor.toArray(
+              function(err, doc){
+                  callback(doc);
+              });
+        });
+    },
+
+    getAnimals : function(callback) {
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function() {
+            var cursor = db.collection('animals').find({});
+            cursor.toArray(
+            function(err, doc){
+                callback(doc);
+            });
         });
     }
+
+
 
 };
 // var getDesc = function(db, callback) {

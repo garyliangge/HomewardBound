@@ -73,13 +73,13 @@ html(lang='en')
             span.bar
               span.visuallyhidden Menu
         nav#menu
-          a(href='https://homebound-159210.appspot-preview.com/') Home screen
-          a(href='https://homebound-159210.appspot-preview.com/home') Fosterable pets
+          a(href='/') Home screen
+          a(href='/home') Fosterable pets
           a.typeform-share.button(href='https://gillian44.typeform.com/to/mfvXgi', data-mode='2', target='_blank') Take the survey
           script.
             (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm_share',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()
 
-          a(href='#') Sign pet(s) up for fostering
+          a(href='/signup') Sign pet(s) up for fostering
         #titleBar
           form.searchForm.searchform
             input.search(type='text', ng-model="query")

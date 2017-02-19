@@ -18,7 +18,8 @@ html(lang='en')
         //-     button#userbtn.btn.btn-primary(type='button' @click='userType = "user"' v-bind:class="{'active': userType=='user' }") User
         //-     button#sitebtn.btn.btn-primary(type='button' @click='userType = "site"' v-bind:class="{'active': userType=='site' }") Site Admin
         //-     button#adbtn.btn.btn-primary(type='button' @click='userType = "advertiser"' v-bind:class="{'active': userType=='advertiser' }") Advertiser
-        form(name="user_signup", method="post", action="/user_signup")
+        //- form(name="user_signup", method="post", action="/user_signup")
+        form(name="user_signup", method="get", action="/home")
           #forms
             .form-group
               label(for="age", style="color: white;") Upload CSV (  

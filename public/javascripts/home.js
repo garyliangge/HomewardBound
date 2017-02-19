@@ -102,7 +102,6 @@ function reSort(query, callback) {
       if (compare(pets[i], pets[maxIndex], query)) {
         maxIndex = i;
       }
-      console.log("at index " + i);
     }
     var temp = pets[maxIndex];
     pets[maxIndex] = pets[indexToSwapTo];
@@ -115,10 +114,10 @@ function reSort(query, callback) {
 function compare(p1, p2, query) {
   switch (query) {
     case 1: //age
-      if (parseAge(p2.animalAgeString) < parseAge(p1.animalAgeString)) {
+      if (p2.animalLocation < p1.animalLocation) {
         return true;
       }
-      if (parseAge(p2.animalAgeString) == parseAge(p1.animalAgeString)) {
+      if (p2.animalLocation < p1.animalLocation) {
         if (p2.animalID < p1.animalID) {
           return true;
         } else {
@@ -127,6 +126,24 @@ function compare(p1, p2, query) {
       }
       return false;
       break;
+      // var coords2 = parseCoordinates(p2.animalLocationCoordinates);
+      // var coords1 = parseCoordinates(p1.animalLocationCoordinates);
+      // zipToLatLong(zip, function(coordsStart) {
+      //   var distance2 = getDistanceFromLatLonInKm(coords2[0], coords2[1], coordsStart[0], coordsStart[1]);
+      //   var distance1 = getDistanceFromLatLonInKm(coords1[0], coords1[1], coordsStart[0], coordsStart[1]);
+      //   if (distance2 < distance1) {
+      //     return true;
+      //   }
+      //   if (distance2 == distance1) {
+      //     if (p2.animalID < p1.animalID) {
+      //       return true;
+      //     } else {
+      //       return false;
+      //     }
+      //   }
+      //   return false;
+      // });
+      // break;
     case 2: //size
       if (p2.animalSizeCurrent < p1.animalSizeCurrent) {
         return true;
@@ -158,11 +175,38 @@ function compare(p1, p2, query) {
   }
 }
 
-function zipToLatLong(zipcode) {
+function zipToLatLong(zipcode, callback) {
   var url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode;
   $.post(url, function (result) {
-    console.log(result.results[0].geometry.location);
+    var results = result.results[0].geometry.location;
+    callback([parseFloat(results[0]), parseFloat(results[1])]);
   });
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1);
+  var a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
+function parseCoordinates(string) {
+  var str = string.split(",");
+  if (str.length < 2) {
+    return [0, 0];
+  }
+  return [parseFloat(str[0]), parseFloat(str[1])];
 }
 
 function parseAge(string) {
@@ -263,7 +307,7 @@ function reQuery(query) {
 
 function init() {
   $("#sneaky_toggle").click(function(){
-    zipToLatLong(zip);
+    reQuery(1);
   });
   $("#sneaky_toggle2").click(function(){
     reQuery(2);

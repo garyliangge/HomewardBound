@@ -21,6 +21,8 @@ app.controller('myCtrl', function($scope) {
 });
 var newPets = [];
 function filterResults(result) {
+  document.getElementById('myModal2').style.display = "block";
+  pets = data;
   newPets = [];
   filterResultsHelper(result, 0);
 }
@@ -34,8 +36,9 @@ function filterResultsHelper(result, index) {
     for (i = 0; i < result.length; i++) {
       for (j = 0; j < tags.length; j++) {
         if (result[i] === tags[j]) {
-          console.log("match found " + tags[j] + ", " + index);
-          newPets.push(pets[index]);
+          var temp = pets[index];
+          temp.matchingTag = tags[j];
+          newPets.push(temp);
           if (index < pets.length - 1) {
             filterResultsHelper(result, index + 1);
             return;
@@ -45,6 +48,7 @@ function filterResultsHelper(result, index) {
               clearList();
               repopulateList();
             }
+            document.getElementById('myModal2').style.display = "none";
             return;
           }
         }
@@ -59,6 +63,7 @@ function filterResultsHelper(result, index) {
         clearList();
         repopulateList();
       }
+      document.getElementById('myModal2').style.display = "none";
       return;
     }
   });
@@ -376,6 +381,13 @@ function getArticle() {
   }
   details.innerHTML = detailString;
   article.appendChild(details);
+
+  const tags = document.createElement('text');
+  tags.className = "tagDetails";
+  if (pets[id].matchingTag != null) {
+    tags.innerHTML = pets[id].matchingTag;
+    article.appendChild(tags);
+  }
 
   id++;
 	return article;

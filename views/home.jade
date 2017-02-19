@@ -24,12 +24,14 @@ html(lang='en')
             span.closeModal ×
             p#modalParagraph Notify me by email about this pet.
             form(action='https://formspree.io/mzqu98@gmail.com', method='POST')
-              input.modalEmail(type='email', name="_replyto")
-              br
+              input.modalEmail(type='email', name="_replyto", placeholder="Email")
               input#modalHidden(type='hidden', name='pet URL', value='www.google.com')
               
               input.modalButton(type='submit', value = 'Send')
-            .positioner
+        #myModal2.modal
+          .modal-content2
+            p#modalParagraph Performing Search...
+            img(src='http://www.sunearthtools.com/dp/images/dpLoading.gif', alt='Loading', height='48', width='48')
         .menu
           .menu_title
             | Sort By
@@ -71,13 +73,13 @@ html(lang='en')
             span.bar
               span.visuallyhidden Menu
         nav#menu
-          a(href='http://localhost:3000') Home screen
-          a(href='http://localhost:3000/home') Fosterable pets
+          a(href='/') Home screen
+          a(href='/home') Fosterable pets
           a.typeform-share.button(href='https://gillian44.typeform.com/to/mfvXgi', data-mode='2', target='_blank') Take the survey
           script.
             (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm_share',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()
 
-          a(href='#') Sign pet(s) up for fostering
+          a(href='/signup') Sign pet(s) up for fostering
         #titleBar
           form.searchForm.searchform
             input.search(type='text', ng-model="query")
@@ -90,7 +92,7 @@ html(lang='en')
         //-   .navitem.navitem1 Adoption Process
         //-   .navitem.navitem2 Take the Quiz
         //-   .navitem.navitem1 Settings
-        p#streamTitle Query: {{result}}
+        p#streamTitle Fosterable Pets
         #feedHolder
           #article-list.article-list
         ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive

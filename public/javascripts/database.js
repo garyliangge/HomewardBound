@@ -8,6 +8,7 @@ mongoose.connect('mongodb://NGNL:ngnlftw1!@ds145359.mlab.com:45359/homebound');
 /* Mongo Shit */
 var fs = require("fs");
 var Animals = require('./schemas/animals');
+var Tags = require('./schemas/tags')
 
 var database = {
     // insertDocument : function(file, callback) {
@@ -31,6 +32,17 @@ var database = {
     //           });
     //     });
     // },
+    insertTags : function(json, callback) {
+        Tags.insertMany(json,{
+            ordered:false
+        },callback());
+    },
+
+    getTags : function(id, callback) {
+        Tags.findOne({animalID: id}, function(err, array) {
+            callback(array.tags);
+        });
+    },
 
     getDesc : function(callback) {
         Animals.find({},{'animalID':1, 'animalDescriptionPlain': 1}, function(err, array) {

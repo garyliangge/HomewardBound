@@ -46,9 +46,5 @@ var database = {
     }
 
 };
-<<<<<<< HEAD
+module.exports = database;
 
-module.exports = database;
-=======
-module.exports = database;
->>>>>>> d442b9091c170341ea7b59ee0a396673abf124e1

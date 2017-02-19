@@ -7,66 +7,43 @@ mongoose.connect('mongodb://NGNL:ngnlftw1!@ds145359.mlab.com:45359/homebound');
 
 /* Mongo Shit */
 var fs = require("fs");
-
-var db = mongoose.connection;
+var Animals = require('./schema/animals');
 
 var database = {
-    insertDocument : function(file, callback) {
-
-        var dataString = fs.readFileSync(file);
-
-        db.on('error', console.error.bind(console, 'connection error:'));
-        db.once('open', function() {
-          // we're connected!
-              var dat = JSON.parse(dataString);
-              var bulk = db.collection('animals').initializeUnorderedBulkOp();
-              var counter = 0;
-              for (var key in dat.data) {
-                  bulk.insert(dat.data[key]);
-                  counter++;
-                  console.log(counter);
-              }
-              bulk.execute(function(err, result) {
-                    // do something with result
-                  callback();
-              });
-        });
-    },
+    // insertDocument : function(file, callback) {
+    //
+    //     var dataString = fs.readFileSync(file);
+    //
+    //     db.on('error', console.error.bind(console, 'connection error:'));
+    //     db.once('open', function() {
+    //       // we're connected!
+    //           var dat = JSON.parse(dataString);
+    //           var bulk = db.collection('animals').initializeUnorderedBulkOp();
+    //           var counter = 0;
+    //           for (var key in dat.data) {
+    //               bulk.insert(dat.data[key]);
+    //               counter++;
+    //               console.log(counter);
+    //           }
+    //           bulk.execute(function(err, result) {
+    //                 // do something with result
+    //               callback();
+    //           });
+    //     });
+    // },
 
     getDesc : function(callback) {
-        db.on('error', console.error.bind(console, 'connection error:'));
-        db.once('open', function() {
-          // we're connected!
-              var cursor = db.collection('animals').find({},{'animalID':1, 'animalDescription': 1});
-
-              cursor.toArray(
-              function(err, doc){
-                  callback(doc);
-              });
+        Animals.find({},{'animalID':1, 'animalDescription': 1}, function(err, array) {
+            callback(array);
         });
+
     },
 
     getAnimals : function(callback) {
-        db.on('error', console.error.bind(console, 'connection error:'));
-        db.once('open', function() {
-            var cursor = db.collection('animals').find({});
-            cursor.toArray(
-            function(err, doc){
-                callback(doc);
-            });
+        Animals.find({}, function(err, array) {
+            callback(array);
         });
     }
 
-
-
 };
-
-// "animalID":"181","animalOrgID":"12","animalName":"Sophie","animalBreed":"Domestic Short Hair \/ Domestic Short Hair \/ Mixed (short coat)"
-// var database = {
-//   insertDocument : function(db, callback) {
-
-//   }
-//
-// }
-
 module.exports = database;

@@ -36,6 +36,10 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/infopage', function(req, res, next) {
+  res.render('profile');
+});
+
 router.get('/home', function(req, res, next) {
   res.render('home');
 });

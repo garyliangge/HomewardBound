@@ -400,13 +400,13 @@ function setButtons() {
       var temp = this.id.split("-");
       var modal = document.getElementById('myModal');
       document.getElementById('modalParagraph').innerHTML = "Notify me by email about " + pets[parseInt(temp[1])].animalName + ".";
-      document.getElementById('modalHidden').value = "https://homebound-159210.appspot-preview.com/profile?q=" + pets[parseInt(temp[1])].animalID;
+      document.getElementById('modalHidden').value = "/profile?q=" + pets[parseInt(temp[1])].animalID;
       modal.style.display = "block";
     });
     var box = "#article-" + i;
     $(box).click(function(){
       var temp = this.id.split("-");
-      window.location.href = "http://localhost:3000/profile?q=" + pets[parseInt(temp[1])].animalID;
+      window.location.href = "/profile?q=" + pets[parseInt(temp[1])].animalID;
     })
   }
 }

@@ -24,12 +24,14 @@ html(lang='en')
             span.closeModal ×
             p#modalParagraph Notify me by email about this pet.
             form(action='https://formspree.io/mzqu98@gmail.com', method='POST')
-              input.modalEmail(type='email', name="_replyto")
-              br
+              input.modalEmail(type='email', name="_replyto", placeholder="Email")
               input#modalHidden(type='hidden', name='pet URL', value='www.google.com')
               
               input.modalButton(type='submit', value = 'Send')
-            .positioner
+        #myModal2.modal
+          .modal-content2
+            p#modalParagraph Performing Search...
+            img(src='http://www.sunearthtools.com/dp/images/dpLoading.gif', alt='Loading', height='48', width='48')
         .menu
           .menu_title
             | Sort By

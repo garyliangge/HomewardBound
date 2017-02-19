@@ -68,9 +68,3 @@ database.getDesc(function(arr){
   }
 });
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Admiral' });
-  console.log(newJSONS.length);
-});

@@ -46,7 +46,7 @@ var database = {
     },
 
     getAnimalById : function(id, callback) {
-        Animals.where({animalID : id}).findOne({}, function(err, array) {
+        Animals.findOne({animalID: id}, function(err, array) {
             callback(array);
         });
     }

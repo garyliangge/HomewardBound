@@ -4,7 +4,7 @@ var id = 0;
 var zip = 94306; //heh hardcoded heh
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
-
+  
 });
 
 
@@ -235,12 +235,12 @@ function getArticle() {
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
   const holder = document.createElement('div');
-  article.id = "article" + id;
+  articleImage.id = "article-" + id;
   holder.className = 'imageholder';
 	article.className = 'article-list__item';
   const button = document.createElement('button');
   button.className = 'like';
-  button.id = 'likeButton' + id;
+  button.id = 'likeButton-' + id;
 	holder.appendChild(articleImage);
   holder.appendChild(button);
   article.appendChild(holder);
@@ -290,11 +290,18 @@ function getArticle() {
 
 function setButtons() {
   for (i = 0; i < id; i++) {
-    var button = "#likeButton" + i;
+    var button = "#likeButton-" + i;
     $(button).click(function(){
+      var temp = this.id.split("-");
       var modal = document.getElementById('myModal');
+      document.getElementById('modalParagraph').innerHTML = "Notify me by email about " + pets[parseInt(temp[1])].animalName + ".";
       modal.style.display = "block";
     });
+    var box = "#article-" + i;
+    $(box).click(function(){
+      var temp = this.id.split("-");
+      window.location.href = "http://localhost:3000/profile?q=" + pets[parseInt(temp[1])].animalID;
+    })
   }
 }
 

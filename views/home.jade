@@ -12,7 +12,7 @@ html(lang='en')
 
   body
     main
-      div
+      div(ng-app='myApp', ng-controller='myCtrl')
         #myModal.modal
           .modal-content
             span.closeModal ×
@@ -79,7 +79,7 @@ html(lang='en')
         //-   .navitem.navitem1 Adoption Process
         //-   .navitem.navitem2 Take the Quiz
         //-   .navitem.navitem1 Settings
-        p#streamTitle Pet Stream
+        p#streamTitle Query: {{result}}
         #feedHolder
           #article-list.article-list
         ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive

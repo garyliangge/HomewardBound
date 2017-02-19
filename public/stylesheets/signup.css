@@ -56,7 +56,7 @@ div#buttons {
   text-align: center;
 }
 
-.signup, .cancel {
+.signup, .cancel, .login {
   width: 8vw;
   margin-right: 1vw;
   display: inline-block;

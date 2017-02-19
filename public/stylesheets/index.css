@@ -64,10 +64,10 @@ div#buttons {
   margin-right: auto;
   text-align: center;
   margin-top: 2vh;
-  width: 20vw;
+  width: 50vw;
 }
 
-a:hover { 
+a:hover {
   text-decoration: none;
 }
 

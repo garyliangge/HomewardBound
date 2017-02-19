@@ -33,7 +33,7 @@ var database = {
     // },
 
     getDesc : function(callback) {
-        Animals.find({},{'animalID':1, 'animalDescription': 1}, function(err, array) {
+        Animals.find({},{'animalID':1, 'animalDescriptionPlain': 1}, function(err, array) {
             callback(array);
         });
 
@@ -46,7 +46,7 @@ var database = {
     },
 
     getAnimalById : function(id, callback) {
-        Animals.where({animalID : id}).findOne({}, function(err, array) {
+        Animals.findOne({animalID: id}, function(err, array) {
             callback(array);
         });
     }

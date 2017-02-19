@@ -1,20 +1,60 @@
 // 'Chewie is a cute Yorkshire Terrier with brown fur and black eyes. She loves to play fetch in a small to medium sized yard. She is also friendly around other dogs!'
+var data = [];
 var pets = [];
 var id = 0;
 var zip = 94306; //heh hardcoded heh
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
-
+  $scope.numSpaces = 0;
+  $scope.query = "";
+  $scope.result = "";
+  $scope.$watch("query", function(newValue, oldValue) {
+    var string = $scope.query;
+    if (string.length > 0) {
+      var tempSpaces = countSpaces(string.trim());
+      if(tempSpaces != $scope.numSpaces) {
+        $scope.numSpaces = tempSpaces;
+        $.post("/parse", {query: string}, function(result){
+          filterResults(result);
+        });
+      }
+    }
+  });
 });
+
+function filterResults(result) {
+  for (j = 0; j < pets.length; j++) {
+    for (i = 0; i < result.length; i++) {
+      if (fuzzyContains(result[i].name, pets[j].tags)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function fuzzyContains(string, array) {
+  for (i = 0; i < array.length; i++) {
+    $.post("/stringComp", {str1: string, str2: array[i]}, function(result) {
+      if (result >= 0.8) {
+        return true;
+      }
+      return false;
+    });
+  }
+}
+
+function countSpaces(string) {
+  var str = string.split(" ");
+  return str.length - 1;
+}
 
 
 $(".search").on('keyup', function (e) {
     if (e.keyCode == 13) {
       console.log({query: $(".search").val()});
         $.post("/parse", {query: $(".search").val()}, function(result){
-          for(var i = 0; i < result.length; i++) {
-            console.log(result[i].name, result[i].salience);
-          }
+          filterResults(result);
         });
     }
 });
@@ -235,12 +275,12 @@ function getArticle() {
 	const articleImage = getArticleImage();
 	const article = document.createElement('article');
   const holder = document.createElement('div');
-  article.id = "article" + id;
+  articleImage.id = "article-" + id;
   holder.className = 'imageholder';
 	article.className = 'article-list__item';
   const button = document.createElement('button');
   button.className = 'like';
-  button.id = 'likeButton' + id;
+  button.id = 'likeButton-' + id;
 	holder.appendChild(articleImage);
   holder.appendChild(button);
   article.appendChild(holder);
@@ -290,11 +330,18 @@ function getArticle() {
 
 function setButtons() {
   for (i = 0; i < id; i++) {
-    var button = "#likeButton" + i;
+    var button = "#likeButton-" + i;
     $(button).click(function(){
+      var temp = this.id.split("-");
       var modal = document.getElementById('myModal');
+      document.getElementById('modalParagraph').innerHTML = "Notify me by email about " + pets[parseInt(temp[1])].animalName + ".";
       modal.style.display = "block";
     });
+    var box = "#article-" + i;
+    $(box).click(function(){
+      var temp = this.id.split("-");
+      window.location.href = "http://localhost:3000/profile?q=" + pets[parseInt(temp[1])].animalID;
+    })
   }
 }
 
@@ -316,7 +363,8 @@ function init() {
     reQuery(3);
   });
   $.post("/getAllAnimals", function(result){
-    pets = result.animals;
+    data = result.animals;
+    pets = data;
     addPage(++page);
   });
 }

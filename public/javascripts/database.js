@@ -9,6 +9,7 @@ mongoose.connect('mongodb://NGNL:ngnlftw1!@ds145359.mlab.com:45359/homebound');
 var fs = require("fs");
 var Animals = require('./schemas/animals');
 var Tags = require('./schemas/tags')
+var Edits = require('./schemas/edits')
 
 var database = {
     // insertDocument : function(file, callback) {
@@ -42,6 +43,19 @@ var database = {
         Tags.findOne({animalID: id}, function(err, array) {
             callback(array.tags);
         });
+    },
+
+    insertEditCode : function(id, code, callback) {
+        var obj = new Object();
+        obj.animalID = id;
+        obj.edit = code;
+        Edits.create(obj, function(err) {
+            callback(err)
+        })
+    },
+
+    getEditCode : function(id, callback) {
+        Edits.findOne({animalID:id}, function(err, val) {callback(val.edit)})
     },
 
     getDesc : function(callback) {

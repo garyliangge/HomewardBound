@@ -8,3 +8,7 @@ $('#modal-container').click(function(){
   $(this).addClass('out');
   $('body').removeClass('modal-active');
 });
+
+$('.button').click(function () {
+  $(this).parent().toggleClass('expand');     
+});

@@ -18,10 +18,9 @@ const languageClient = Language({
 });
 
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Admiral' });
+  res.render('index', { title: 'Homeward' });
 });
 
 router.get('/ad', function(req, res, next) {
@@ -36,8 +35,57 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-router.get('/infopage', function(req, res, next) {
-  res.render('profile');
+router.get('/profile', function(req, res, next) {
+  var query = req.query;
+  console.log(query.q);
+  database.getAnimalById(parseInt(query.q), function(result){
+    res.render('profile', 
+      {params:
+        {
+          //Basic Characteristics
+          title: result.animalName, 
+          sex: result.animalSex,
+          age: result.animalAgeString,
+          size: result.animalSizeCurrent,
+
+          //Adoption Status
+          status: result.animalStatus,
+          availableDate : (!result.animalAvailableDate==null) ? (result.animalAvailableDate += "") : "Not Applicable",
+          adoptionFee : (!result.animalAdoptionFee==null) ? (result.animalAdoptionFee += "") : "0",
+
+          //Characteristics
+          activityLevel : result.animalActivityLevel,
+          breed : result.animalBreed,
+          sheds : (result.animalShedding) ? "yes" : "no",
+
+          coatLength : (!result.animalcoatLength==null) ? (result.animalcoatLength += "") : "Not Applicable",
+          color : result.animalColor,
+          declawed : (result.animalDeclawed) ? "yes" : "no",
+          description: result.animalDescription,
+          distinguishingMarks : result.animalDistinguishingMarks,
+          energy : result.animalEnergyLevel,
+          exercise : result.animalExerciseNEeds,
+          fence: result.animalFence,
+          areaFound: (!result.animalFoundPostalcode==null) ? (result.animalFoundPostalcode += "") : "Not Applicable",
+          sizePotential: result.animalGeneralSizePotential,
+          grooming : result.animalGroomingNeeds,
+          housetrained : (!result.animalHousetrained==null) ? (result.Housetrained += "") : "Not Applicable",
+          environment : result.animalIndoorOutdoor,
+          killDate : (!result.animalKillDate==null) ? (result.animalKillDate += "") : "Not Applicable",
+          killReason : result.animalKillReason,
+          location: result.animalLocationCityState,
+          fosterNeed : (!result.animalNeedsFoster==null) ? (result.animalNeedsFoster += "") : "Not Applicable",
+          children : (!result.animalOKWithKids==null) ? (result.animalOKWithKids += "") : "Not Applicable",
+          cats : (!result.animalOKWithCats==null) ? (result.animalOKWithCats += "") : "Not Applicable",
+          dogs : (!result.animalOKWithDogs==null) ? (result.animalOKWithDogs += "") : "Not Applicable",
+          adoptionPending : (!result.animalAdoptionPending==null) ? (result.animalAdoptionPending += "") : "Not Applicable",
+          sponsor : result.animalSponsorshipDetails,
+          bark : (!result.animalVocal==null) ? (result.animalVocal += "") : "Not Applicable",
+          
+        }});
+    console.log(result.animalFoundPostalcode);
+    console.log(result.animalFence);
+  });           
 });
 
 router.get('/home', function(req, res, next) {

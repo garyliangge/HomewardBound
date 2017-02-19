@@ -64,7 +64,46 @@ html(lang='en')
             img(src='media/cat.png')
           #rectangle
           .title
-            h2 IsPupper?
+            h2 #{params.title}
+          .p
+            h2 Basic Characteristics
+            p #{params.sex}
+            p Age: #{params.age}
+            p Size: #{params.size}
+            p Size Potential: #{params.sizePotential}
+            p House-Trained: #{params.housetrained}
+            p Bark: #{params.bark}
+            p Environment: #{params.environment}
+
+            h2 Current Status
+            p Adoption Status: #{params.status}
+            p Available Date: #{params.availableDate}
+            p Adoption Fee: #{params.adoptionFee}
+            p Urgency Date: #{params.killDate}
+            p Urgency Reason: #{params.killReason}
+            p Location: #{params.location}
+            p Foster Need: #{params.fosterNeed}
+            p Adoption Pending: #{params.adoptionPending}
+            p Sponsorship: #{params.sponsor}
+
+            h2 Physical Description
+            p Breed: #{params.breed}
+            p Sheds: #{params.sheds}
+            p Coat Length: #{params.coatLength}
+            p Color: #{params.color}
+            p Declawed: #{params.declawed}
+            p Description: #{params.description}
+            p Energy: #{params.energy}
+            p Exercise: #{params.exercise}
+            p Fence: #{params.fence}
+            p Activity Level: #{params.activityLevel}
+            p Grooming Needs: #{params.grooming}
+
+            h2 Further Descriptions
+            p Place Found: #{params.areaFound}
+            p Good with Children: #{params.children}
+            p Good with Cats: #{params.cats}
+            p Good with Dogs: #{params.dogs}
 
 
         nav#menu
@@ -92,6 +131,7 @@ html(lang='en')
         #feedHolder
           #article-list.article-list
         ul#article-list-pagination.article-list__pagination.article-list__pagination--inactive
+    script(src='/javascripts/profile.js')
     script(src='/javascripts/home.js')
 
     .formFormat

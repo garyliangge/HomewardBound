@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var Animals = mongoose.model('Animal', {
-     animalID : Number,
+     animalID : String,
      animalOrgID : Number,
      animalActivityLevel : String,
      animalAdoptedDate : Date,
@@ -83,6 +83,8 @@ var Animals = mongoose.model('Animal', {
      animalUpdatedDate : String,
      animalUrl : String,
      animalVocal : Boolean,
+
+     
      animalYardRequired : Boolean,
      animalAffectionate : Boolean,
      animalApartment : Boolean,
